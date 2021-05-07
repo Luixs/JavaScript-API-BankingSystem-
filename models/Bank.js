@@ -4,10 +4,10 @@ module.exports = (sequelize, Sequelize) =>{
         description: Sequelize.STRING
     })
 
-    Agency.associate = (models) =>{
-        Agency.belongsTo(models.Bank, {
-            foreingKey: 'poketipoId',
-            as: "poketipo"
+    Bank.associate = (models) =>{
+        Bank.hasMany(models.Agency, {
+            foreingKey: 'idBank',
+            as: "bank"
         })
     }
     return Bank;

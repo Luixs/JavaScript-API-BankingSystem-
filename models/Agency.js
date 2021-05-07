@@ -6,8 +6,8 @@ module.exports = (sequelize, Sequelize) =>{
 
     Agency.associate = (models) =>{
         Agency.belongsTo(models.Bank, {
-            foreingKey: 'poketipoId',
-            as: "poketipo"
+            foreingKey: 'idBank',
+            as: "bank"
         })
     }
     return Agency;
