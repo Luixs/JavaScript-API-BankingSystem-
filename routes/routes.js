@@ -4,12 +4,15 @@ const { Router } = require ('express');
 const BankController = require ('../controllers/bankController');
 const ClientController = require('../controllers/clientController');
 const AgencyController = require('../controllers/agencyController');
-
+const accountController = require('../controllers/accountController');
 const routes = Router();
 
 routes.get('/', (req,res)=>{
     res.status(200).json({mensagem: "Hello, Welcome to the Bank System"});
 })
+
+// ACCOUT ROUTE
+routes.post('/account', accountController.create);
 
 // BANK ROUTES
 routes.get('/banks', BankController.getAll);
