@@ -15,6 +15,7 @@ routes.get('/', (req,res)=>{
 
 // BANK ROUTES
 routes.get('/banks', BankController.getAll);
+routes.post('/bank', BankController.create);
 
 // CLIENT ROUTES
 routes.get('/clients', ClientController.getAll);

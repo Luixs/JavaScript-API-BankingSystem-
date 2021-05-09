@@ -8,3 +8,4 @@ module.exports = (sequelize, Sequelize) =>{
     })
     return Client;
 }
+
