@@ -4,6 +4,7 @@ const { Router } = require ('express');
 const BankController = require ('../controllers/bankController');
 const ClientController = require('../controllers/clientController');
 const AgencyController = require('../controllers/agencyController');
+const bankController = require('../controllers/bankController');
 //const PokemonController = require('../controllers/PokemonController');
 //const PokeTipoController = require('../controllers/PokeTipoController');
 
@@ -15,7 +16,10 @@ routes.get('/', (req,res)=>{
 
 // BANK ROUTES
 routes.get('/banks', BankController.getAll);
+routes.get('/bank/:id', bankController.getOne);
 routes.post('/bank', BankController.create);
+routes.put('/bank/:id',bankController.update);
+routes.delete('/bank/:id',bankController.delete);
 
 // CLIENT ROUTES
 routes.get('/clients', ClientController.getAll);
