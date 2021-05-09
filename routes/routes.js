@@ -23,5 +23,6 @@ routes.post('/client', ClientController.create);
 // AGENCY ROUTES
 
 routes.get('/agencies', AgencyController.getAll);
+routes.post('/agency',AgencyController.create);
 
 module.exports = routes;
