@@ -19,7 +19,10 @@ routes.post('/bank', BankController.create);
 
 // CLIENT ROUTES
 routes.get('/clients', ClientController.getAll);
+routes.get('/client/:id',ClientController.getOne);
 routes.post('/client', ClientController.create);
+routes.put('/client/:id', ClientController.update);
+routes.delete('/client/:id', ClientController.delete);
 // AGENCY ROUTES
 
 routes.get('/agencies', AgencyController.getAll);
