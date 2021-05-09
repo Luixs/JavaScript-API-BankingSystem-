@@ -4,9 +4,6 @@ const { Router } = require ('express');
 const BankController = require ('../controllers/bankController');
 const ClientController = require('../controllers/clientController');
 const AgencyController = require('../controllers/agencyController');
-const bankController = require('../controllers/bankController');
-//const PokemonController = require('../controllers/PokemonController');
-//const PokeTipoController = require('../controllers/PokeTipoController');
 
 const routes = Router();
 
@@ -16,10 +13,10 @@ routes.get('/', (req,res)=>{
 
 // BANK ROUTES
 routes.get('/banks', BankController.getAll);
-routes.get('/bank/:id', bankController.getOne);
+routes.get('/bank/:id', BankController.getOne);
 routes.post('/bank', BankController.create);
-routes.put('/bank/:id',bankController.update);
-routes.delete('/bank/:id',bankController.delete);
+routes.put('/bank/:id',BankController.update);
+routes.delete('/bank/:id',BankController.delete);
 
 // CLIENT ROUTES
 routes.get('/clients', ClientController.getAll);
@@ -27,9 +24,11 @@ routes.get('/client/:id',ClientController.getOne);
 routes.post('/client', ClientController.create);
 routes.put('/client/:id', ClientController.update);
 routes.delete('/client/:id', ClientController.delete);
+
 // AGENCY ROUTES
-
 routes.get('/agencies', AgencyController.getAll);
+routes.get('/agency/:id',AgencyController.getOne);
+routes.put('/agency/:id',AgencyController.update);
 routes.post('/agency',AgencyController.create);
-
+routes.delete('/agency/:id',AgencyController.delete);
 module.exports = routes;
