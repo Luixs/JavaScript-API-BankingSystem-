@@ -2,8 +2,8 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Acounts', {
-       AgencyId: { 
+    await queryInterface.createTable('Accounts', {
+       agencyId: { 
          primaryKey: true,
          allowNull: true,
          type: Sequelize.INTEGER,
@@ -14,7 +14,7 @@ module.exports = {
            as: "AgencyId"
          }
         },
-        ClientId:{
+        clientId:{
           primaryKey: true,
           allowNull: true,
           type: Sequelize.INTEGER,
@@ -25,11 +25,18 @@ module.exports = {
             as: "ClientId"
           }
         },
-        OpenDate:{
+        accountopening:{
+          allowNull: false,
+          type: Sequelize.DATE
+        },
+        createdAt: {
+          allowNull: false,
+          type: Sequelize.DATE
+        },
+        updatedAt: {
           allowNull: false,
           type: Sequelize.DATE
         }
-      
       });    
     /**
      * Add altering commands here.
@@ -40,7 +47,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Acounts');
+    await queryInterface.dropTable('Accounts');
     /**
      * Add reverting commands here.
      *
