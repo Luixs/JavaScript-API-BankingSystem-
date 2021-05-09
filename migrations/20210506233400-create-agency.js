@@ -2,12 +2,12 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('agencies', { 
+    await queryInterface.createTable('Agencies', { 
       id: {
         primaryKey: true,
         allowNull: false,
-        autoIncrement: true,         
-        type: Sequelize.INTEGER
+        autoIncrement: true,
+        type: Sequelize.INTEGER 
       },
       number: {
         allowNull: false,
@@ -16,26 +16,25 @@ module.exports = {
       description: {
         allowNull: false,
         type: Sequelize.STRING
-      },
-      // ------- FOREIGN KEY ----------
-      idBank: {
+      }, 
+      bankId:{
         allowNull: false,
         type: Sequelize.INTEGER,
-        refereces: {
+        references: {
           model: 'Banks',
           key: 'id',
-          as: 'idBank'
-        },
-        createdAt:{
-          allowNull: false,
-          type: Sequelize.DATE          
-        },
-        updatedAt:{
-          allowNull: false,
-          type: Sequelize.DATE
-        }    
+          as: 'bankId'
+        }
+      },
+      createdAt:{
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt:{
+        allowNull: false,
+        type: Sequelize.DATE
       }
-     })
+    });
     /**
      * Add altering commands here.
      *
@@ -45,7 +44,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('agencies');
+    await queryInterface.dropTable('Agencies')
     /**
      * Add reverting commands here.
      *

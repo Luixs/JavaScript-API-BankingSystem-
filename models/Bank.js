@@ -1,12 +1,13 @@
 module.exports = (sequelize, Sequelize) =>{
     const Bank = sequelize.define("Bank", {
-        number: Sequelize.INTEGER,
-        description: Sequelize.STRING
+        cpnj: Sequelize.INTEGER,
+        companyName: Sequelize.STRING,
+        contact: Sequelize.STRING,
     })
 
     Bank.associate = (models) =>{
         Bank.hasMany(models.Agency, {
-            foreingKey: 'idBank',
+            foreingKey: 'bankId',
             as: "bank"
         })
     }
