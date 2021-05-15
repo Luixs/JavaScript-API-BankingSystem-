@@ -17,25 +17,22 @@ class AgencyController{
             if(!agencyId && !clientId){
                 res.status(401).json({Erro: "ID Client or Agency ID is not found, try again"})
             }else{
-                const oldDate = (req.body.accountopening);
-
+                let date = ConvertDate(req.body.accountopening);                
+                let accoutNew = {
+                    agencyId: agencyId,
+                    clientId: clientId,
+                    accountopening: date         
+                }
+                const accoutRes = await Account.create(accoutNew);
+                res.status(200).json({"Create Account": accoutRes})
             }            
         } catch (error) {
             res.status(400).json({erro: error.message});
         }
-        let date = ConvertDate(req.body.accountopening);
-        console.log(date);
-        /*let accoutNew = {
-            agencyId: agencyId,
-            clientId: clientId,
-            accountopening: newDateFinal         
-        }
-        const accoutRes = await Account.create(accoutNew);
-        res.status(200).json({"Create accout": accoutRes})*/
     }
     async getAll(req,res){
         try {
-            const accounts = Account.findAll({
+            const allAccounts = await Account.findAll({
                 include: [{
                     model: Client,
                     as: "client"
@@ -44,7 +41,7 @@ class AgencyController{
                     as: "agency"
                 }]
             })
-            res.status(200).json({"Accounts": accounts})
+            res.status(200).json({"Accounts": allAccounts})
         } catch (error) {
             res.status(400).json({erro: error.message})
         }
