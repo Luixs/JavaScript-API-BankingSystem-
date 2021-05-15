@@ -9,16 +9,10 @@ module.exports = (sequelize, Sequelize) =>{
             foreingKey: 'bankId',
             as: "bank"
         }),
-        Agency.belongsToMany(models.Client, {
-            through: "clientagency"
+        Agency.hasMany(models.Account, {
+            foreignKey: "agencyId",
+            as: "agency"
         })
     }
-    //N - M
-    /*Agency.associate = (models) =>{
-        Agency.belongsToMany(models.Client, {
-            through: "clientagency"
-        })
-    }*/
-
     return Agency;
 }

@@ -15,20 +15,19 @@ module.exports = {
           type: Sequelize.INTEGER,
           // REFERENCIA PARA A AGENCY DB
           refereces: {
-            model: "Agency",
+            model: "Agencies",
             key: "id",
-            as: "AgencyId"
+            as: "agencyId"
           }
           },
           clientId:{
             primaryKey: true,
             allowNull: true,
             type: Sequelize.INTEGER,
-            // CREATE A REFERENCE
             refereces : {
-              model: "Bank",
+              model: "Clients",
               key: "id",
-              as: "ClientId"
+              as: "clientId"
             }
           },
           accountopening:{

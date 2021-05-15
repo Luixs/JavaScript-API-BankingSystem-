@@ -2,18 +2,17 @@
 module.exports = (sequelize, Sequelize) =>{
     const Account = sequelize.define("Account", {
         accountopening: Sequelize.DATE        
-    },//{timestamps: false}
+    })
     
-    )
     Account.associate = (models) =>{
-        Account.belongsToMany(models.Client,{
-            through: "Account_Client"
-        });
-    }
-    Account.associate = (models) =>{
-        Account.belongsToMany(models.Agency, {
-            through: "Account_Agency"
-        });
+        Account.belongsTo(models.Client, {
+            foreingKey: "clientId",
+            as: "client"
+        },
+        Account.belongsTo(models.Agency, {
+            foreignKey: "agencyId",
+            as: "agency"
+        }))
     }
     return Account;
 }

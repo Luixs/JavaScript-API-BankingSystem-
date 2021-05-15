@@ -9,8 +9,9 @@ module.exports = (sequelize, Sequelize) =>{
 
     //N - M
     Client.associate = (models) =>{
-        Client.belongsToMany(models.Agency, {
-            through: "clientagency"
+        Client.hasMany(models.Account, {
+            foreingKey: "clientId",
+            as: "client"
         })
     }
     return Client;

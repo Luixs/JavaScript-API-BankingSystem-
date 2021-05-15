@@ -4,7 +4,7 @@ const { Router } = require ('express');
 const BankController = require ('../controllers/bankController');
 const ClientController = require('../controllers/clientController');
 const AgencyController = require('../controllers/agencyController');
-const accountController = require('../controllers/accountController');
+const AccountController = require('../controllers/accountController');
 const routes = Router();
 
 routes.get('/', (req,res)=>{
@@ -12,10 +12,11 @@ routes.get('/', (req,res)=>{
 })
 
 // ACCOUT ROUTE
-routes.post('/account', accountController.create);
+routes.post('/account', AccountController.create);
+routes.get('/accounts', AccountController.getAll);
 
 // BANK ROUTES
-routes.get('/banks', BankController.getAll);
+routes.get('/banks', BankController.getAll); 
 routes.get('/bank/:id', BankController.getOne);
 routes.post('/bank', BankController.create);
 routes.put('/bank/:id',BankController.update);
@@ -28,8 +29,9 @@ routes.post('/client', ClientController.create);
 routes.put('/client/:id', ClientController.update);
 routes.delete('/client/:id', ClientController.delete);
 
+
 // AGENCY ROUTES
-routes.get('/agencies', AgencyController.getAll); // TESTADA E FUNCIONAL
+routes.get('/agencies', AgencyController.getAll); 
 routes.get('/agency/:id',AgencyController.getOne);
 routes.put('/agency/:id',AgencyController.update);
 routes.post('/agency',AgencyController.create);
