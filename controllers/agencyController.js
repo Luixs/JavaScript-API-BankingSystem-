@@ -1,4 +1,5 @@
 const { Agency, Bank } = require('../models');
+const Client = require('../models/Client');
 
 class AgencyController{
     async getAll(req,res){
@@ -7,7 +8,8 @@ class AgencyController{
                 include: [{
                     model: Bank, 
                     as: "bank"                   
-                }]
+                },
+            ]
             })
             res.status(200).json({"Agencies": agencies});
         } catch (error) {
@@ -69,8 +71,10 @@ class AgencyController{
                 let agency = {
                 number: numberNum,
                 description: req.body.description,
-                bankId: Number(req.body.bankId)}
+                bankId: Number(req.body.bankId)
+                }
                 const agencyRes = await Agency.create(agency);
+                //const agencyRes = await Agency.addClient()
                 res.status(200).json({"AgencyInsert": agencyRes});
             }
         } catch (error) {

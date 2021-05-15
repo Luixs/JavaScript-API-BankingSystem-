@@ -29,7 +29,7 @@ routes.put('/client/:id', ClientController.update);
 routes.delete('/client/:id', ClientController.delete);
 
 // AGENCY ROUTES
-routes.get('/agencies', AgencyController.getAll);
+routes.get('/agencies', AgencyController.getAll); // TESTADA E FUNCIONAL
 routes.get('/agency/:id',AgencyController.getOne);
 routes.put('/agency/:id',AgencyController.update);
 routes.post('/agency',AgencyController.create);

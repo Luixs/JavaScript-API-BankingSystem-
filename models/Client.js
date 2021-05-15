@@ -6,6 +6,13 @@ module.exports = (sequelize, Sequelize) =>{
         wage: Sequelize.INTEGER,
         contact: Sequelize.STRING,
     })
+
+    //N - M
+    Client.associate = (models) =>{
+        Client.belongsToMany(models.Agency, {
+            through: "clientagency"
+        })
+    }
     return Client;
 }
 
