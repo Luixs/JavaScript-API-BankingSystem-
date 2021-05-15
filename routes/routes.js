@@ -12,8 +12,9 @@ routes.get('/', (req,res)=>{
 })
 
 // ACCOUT ROUTE
-routes.post('/account', AccountController.create);
 routes.get('/accounts', AccountController.getAll);
+routes.get('/account/:id', AccountController.getOne);
+routes.post('/account', AccountController.create);
 
 // BANK ROUTES
 routes.get('/banks', BankController.getAll); 

@@ -43,7 +43,28 @@ class AgencyController{
             })
             res.status(200).json({"Accounts": allAccounts})
         } catch (error) {
-            res.status(400).json({erro: error.message})
+            res.status(400).json({erro: error.message});
+        }
+    }
+    async getOne(req,res){
+        try {
+            const idSearch = Number(req.params.id);
+            const accountFromId = await Account.findByPk(idSearch,{
+                include: [{
+                    model: Client,
+                    as: "client"
+                },{
+                    model: Agency,
+                    as: "agency"
+                }]
+            });
+            if(!accountFromId){
+                throw new Error("INVALID ID,Try a new One ID!!!")
+            }else{
+                res.status(200).json({"account found": accountFromId});
+            }
+        } catch (error) {
+            res.status(400).json({erro: error.message});
         }
     }
 }
