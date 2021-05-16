@@ -182,7 +182,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Return a Bank using a ID params",
+            "description": "Return a Bank",
             "schema": {
               "$ref": "#/definitions/Bank"
             }
@@ -587,6 +587,46 @@
         },
         "bank": {
           "$ref": "#/definitions/Bank"
+        }
+      }
+    },
+    "Account": {
+      "type": "object",
+      "properties": {
+        "accountopening": {
+          "type": "string",
+          "example": "25-04-2021"
+        },
+        "clientId": {
+          "$ref": "#/definitions/Client"
+        },
+        "agencyId": {
+          "$ref": "#/definitions/Agency"
+        }
+      }
+    },
+    "Client": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Luis Starlino"
+        },
+        "cpf": {
+          "type": "number",
+          "example": 1423058026
+        },
+        "gender": {
+          "type": "string",
+          "example": "Male"
+        },
+        "wage": {
+          "type": "number",
+          "example": 5000
+        },
+        "contact": {
+          "type": "string",
+          "example": "+55 031 998250691"
         }
       }
     }

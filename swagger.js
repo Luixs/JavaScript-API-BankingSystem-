@@ -28,6 +28,20 @@ const docs = {
         bank:{
             $ref: '#/definitions/Bank'
         }
+    },Account: {
+        accountopening: "25-04-2021",
+        clientId: {
+            $ref: '#/definitions/Client'
+        },
+        agencyId: {
+            $ref: '#/definitions/Agency'
+        }
+    },Client: {
+        name: "Luis Starlino",
+        cpf: 1423058026,
+        gender: "Male",
+        wage: 5000,
+        contact:"+55 031 998250691"
     }
 }
 };
