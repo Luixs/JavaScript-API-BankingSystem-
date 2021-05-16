@@ -31,7 +31,7 @@ class AgencyController{
     async update(req,res){
         try {
             const findById = Number(req.params.id);
-            const agencyFind = await Agency.findByPk(findById);
+            const agencyFind = await Agency.findByPk(findById);           
             if(!agencyFind){
                 res.status(400).json("Doesn't exist a Agencuy with this ID!!!Try the a new one")
             }else{

@@ -8,11 +8,14 @@
     "express": "^4.17.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.2",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "swagger-autogen": "^2.8.2",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "swagger-autogen": "node swagger.js"
   },
   "keywords": [],
   "author": "",

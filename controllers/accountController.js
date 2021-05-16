@@ -30,6 +30,32 @@ class AgencyController{
             res.status(400).json({erro: error.message});
         }
     }
+    async update(req,res){
+        try {
+            const idSearch = Number(req.params.id);
+            console.log(idSearch)
+            const accountFromId = await Account.findByPk(idSearch);
+            console.log(accountFromId);
+            if(!accountFromId == accountFromId){
+                throw new Error("INVALID ID,Try a new One ID!!!")
+            }
+            /*s
+            if(!accountFromId){
+                throw new Error("INVALID ID,Try a new One ID!!!")
+            }else{
+                let newDate = ConvertDate(req.body.accountopening);
+                let newAccount = {
+                    agencyId: req.body.agencyId,
+                    clientId: req.body.clientId,
+                    accountopening: newDate
+                }
+                await accountFromId.update(newAccount);
+                res.status(200).json({"account updated": accountFromId});
+            }*/
+        } catch (error) {
+            
+        }
+    }
     async getAll(req,res){
         try {
             const allAccounts = await Account.findAll({
@@ -62,6 +88,28 @@ class AgencyController{
                 throw new Error("INVALID ID,Try a new One ID!!!")
             }else{
                 res.status(200).json({"account found": accountFromId});
+            }
+        } catch (error) {
+            res.status(400).json({erro: error.message});
+        }
+    }
+    async delete(req,res){
+        try {
+            const idSearch = Number(req.params.id);
+            const accountFromId = await Account.findByPk(idSearch,{
+                include: [{
+                    model: Client,
+                    as: "client"
+                },{
+                    model: Agency,
+                    as: "agency"
+                }]
+            });
+            if(!accountFromId){
+                throw new Error("INVALID ID,Try a new One ID!!!")
+            }else{
+                await accountFromId.destroy();
+                res.status(200).json({"account destroyed": accountFromId});
             }
         } catch (error) {
             res.status(400).json({erro: error.message});
