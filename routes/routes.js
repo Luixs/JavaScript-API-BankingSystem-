@@ -8,12 +8,12 @@ const AccountController = require('../controllers/accountController');
 const routes = Router();
 
 routes.get('/', (req,res)=>{
-    // #swagger.tags = ['Main Route']
-    // #swagger.description = 'A main route to the Bank System API, return a simple JSON'
+    // #swagger.tags = ['MAIN ROUTE']
+    // #swagger.description = 'A Main Route to the Bank System API(BS-API), return a simple JSON'
 
     /* #swagger.responses[200] = {
         schema: {message: "Hello Horld"},
-        description: 'A sucefull message route'
+        description: 'A sucefull Message Route'
     }*/
     res.status(200).json({mensagem: "Hello, Welcome to the Bank System"});
 })

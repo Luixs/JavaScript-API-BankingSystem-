@@ -10,6 +10,13 @@ class BankController{
         }
     }
     async getOne(req,res){
+        // #swagger.tags = ['BANK']
+        // #swagger.description = 'Search a Bank using a id params'
+
+        /* #swagger.responses[200] = {
+            schema: { $ref: '#/definitions/Bank'},
+            description: 'Return a Bank'
+        }*/
         try {
             const idSearch = Number(req.params.id);
             const bankFind = await Bank.findByPk(idSearch); 

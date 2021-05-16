@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "REST API",
-    "description": ""
+    "title": "BANKING SYSTEM API",
+    "description": "Developed by Luis Starlino "
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -11,19 +11,23 @@
   "schemes": [
     "http"
   ],
-  "consumes": [],
-  "produces": [],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/": {
       "get": {
         "tags": [
-          "Main Route"
+          "MAIN ROUTE"
         ],
-        "description": "A main route to the Bank System API, return a simple JSON",
+        "description": "A Main Route to the Bank System API(BS-API), return a simple JSON",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "A sucefull message route",
+            "description": "A sucefull Message Route",
             "schema": {
               "type": "object",
               "properties": {
@@ -164,8 +168,10 @@
     },
     "/bank/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "BANK"
+        ],
+        "description": "Search a Bank using a id params",
         "parameters": [
           {
             "name": "id",
@@ -176,7 +182,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Return a Bank using a ID params",
+            "schema": {
+              "$ref": "#/definitions/Bank"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -547,5 +556,39 @@
       }
     }
   },
-  "definitions": {}
+  "definitions": {
+    "Bank": {
+      "type": "object",
+      "properties": {
+        "cpnj": {
+          "type": "number",
+          "example": 142680
+        },
+        "companyName": {
+          "type": "string",
+          "example": "Star Bank"
+        },
+        "contact": {
+          "type": "string",
+          "example": "+55 31 998250691"
+        }
+      }
+    },
+    "Agency": {
+      "type": "object",
+      "properties": {
+        "number": {
+          "type": "number",
+          "example": 44
+        },
+        "description": {
+          "type": "string",
+          "example": "Description of the simples Agency with a Bank associate"
+        },
+        "bank": {
+          "$ref": "#/definitions/Bank"
+        }
+      }
+    }
+  }
 }
