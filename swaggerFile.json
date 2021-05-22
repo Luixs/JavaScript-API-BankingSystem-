@@ -153,15 +153,17 @@
     },
     "/banks": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "BANK"
+        ],
+        "description": "Search all Banks from de data base",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Return all banks"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
           }
         }
       }
@@ -188,13 +190,18 @@
             }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
+          },
+          "404": {
+            "description": "Not found a Bank Using this ID"
           }
         }
       },
       "put": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "BANK"
+        ],
+        "description": "Update a DateBank using a ID to the find him into DB",
         "parameters": [
           {
             "name": "id",
@@ -231,8 +238,10 @@
         }
       },
       "delete": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "BANK"
+        ],
+        "description": "Delete a Bank from the DataBase Finded by ID\"\r \n   try {\r  const findById = Number(req.params.id);\r  const bankFind = await Bank.findByPk(findById);\r  if(!bankFind){\r  res.status(400).json(\"Doesn",
         "parameters": [
           {
             "name": "id",
@@ -241,20 +250,15 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
+        "responses": {}
       }
     },
     "/bank": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "BANK"
+        ],
+        "description": "Create a New Bank into DB",
         "parameters": [
           {
             "name": "obj",
