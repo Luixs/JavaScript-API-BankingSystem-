@@ -156,12 +156,25 @@ class BankController{
     }
     async delete(req,res){
         // #swagger.tags = ['BANK']
-        // #swagger.description = 'Delete a Bank from the DataBase Finded by ID"
+
+        // #swagger.description = 'Delete a Bank from the DataBase Finded by ID'
+
+        /* #swagger.responses[200] = {
+            description: 'Deleted Bank',
+            schema: { $ref: '#/definitions/Bank'},
+            
+        }*/
+
+        /* #swagger.responses[401] = {
+            description: "Not found this bank using the ID"
+        }
+        */
+      
         try {
             const findById = Number(req.params.id);
             const bankFind = await Bank.findByPk(findById);
             if(!bankFind){
-                res.status(400).json("Doesn't exist a Bank with this ID!!!Try the a new one")
+                res.status(401).json("Doesn't exist a Bank with this ID!!!Try the a new one")
             }else{
                 await bankFind.destroy();
                 return res.status(200).json({"Destroy this Bank": bankFind});

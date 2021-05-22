@@ -276,7 +276,7 @@
         "tags": [
           "BANK"
         ],
-        "description": "Delete a Bank from the DataBase Finded by ID\"\r \n   try {\r  const findById = Number(req.params.id);\r  const bankFind = await Bank.findByPk(findById);\r  if(!bankFind){\r  res.status(400).json(\"Doesn",
+        "description": "Delete a Bank from the DataBase Finded by ID",
         "parameters": [
           {
             "name": "id",
@@ -285,7 +285,20 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "Deleted Bank",
+            "schema": {
+              "$ref": "#/definitions/Bank"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Not found this bank using the ID"
+          }
+        }
       }
     },
     "/bank": {
