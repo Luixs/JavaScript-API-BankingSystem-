@@ -15,7 +15,7 @@ class AgencyController{
             res.status(400).json({erro: error.message});
         }
     }
-    async getOne(req,res){
+    async getOne(req,res){        
         try {
             const getID = Number(req.params.id);
             const agencyById = await Bank.findByPk(getID);

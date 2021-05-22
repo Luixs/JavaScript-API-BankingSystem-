@@ -179,7 +179,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "try to put a number right here"
           }
         ],
         "responses": {
@@ -207,22 +208,53 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Using to find him"
           },
           {
-            "name": "obj",
+            "name": "cpnj",
             "in": "body",
+            "description": "A New CNPJ Number",
+            "required": true,
+            "type": "string",
             "schema": {
               "type": "object",
               "properties": {
                 "cpnj": {
-                  "example": "any"
-                },
+                  "type": "string",
+                  "example": "0565"
+                }
+              }
+            }
+          },
+          {
+            "name": "companyName",
+            "in": "body",
+            "description": "A New Company Name",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "companyName": {
-                  "example": "any"
-                },
-                "contact\r": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "StarLigth"
+                }
+              }
+            }
+          },
+          {
+            "name": "contact",
+            "in": "body",
+            "description": "A New Contact",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "contact": {
+                  "type": "string",
+                  "example": "9985152"
                 }
               }
             }
@@ -230,7 +262,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully Updated",
+            "schema": {
+              "$ref": "#/definitions/Bank"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -261,27 +296,60 @@
         "description": "Create a New Bank into DB",
         "parameters": [
           {
-            "name": "obj",
+            "name": "cpnj",
             "in": "body",
+            "description": "CNPJ Number",
+            "required": true,
+            "type": "string",
             "schema": {
               "type": "object",
               "properties": {
-                "cnpj": {
-                  "example": "any"
-                },
+                "cpnj": {
+                  "type": "string",
+                  "example": "0565"
+                }
+              }
+            }
+          },
+          {
+            "name": "companyName",
+            "in": "body",
+            "description": "The company Name",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "companyName": {
-                  "example": "any"
-                },
-                "contact\r": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "StarLigth"
+                }
+              }
+            }
+          },
+          {
+            "name": "contact",
+            "in": "body",
+            "description": "Contact",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "contact": {
+                  "type": "string",
+                  "example": "9985152"
                 }
               }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Successfully Created",
+            "schema": {
+              "$ref": "#/definitions/Bank"
+            }
           },
           "400": {
             "description": "Bad Request"

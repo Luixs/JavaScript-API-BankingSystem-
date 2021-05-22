@@ -22,6 +22,13 @@ class BankController{
         // #swagger.tags = ['BANK']
         // #swagger.description = 'Search a Bank using a id params'
 
+        /* #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'try to put a number right here',
+            required: true,
+            type: 'integer'
+        }
+        */
         /* #swagger.responses[200] = {
             schema: { $ref: '#/definitions/Bank'},
             description: 'Return a Bank'
@@ -46,10 +53,37 @@ class BankController{
     }
     async create(req,res){
         // #swagger.tags = ['BANK']
+
         // #swagger.description = 'Create a New Bank into DB'
-        /* #swagger.resposes[201]
-         * 
-         */
+
+        /* #swagger.responses[201] = {
+            description: 'Successfully Created',
+            schema: { $ref: '#/definitions/Bank'},
+            
+        }*/
+
+        /* #swagger.parameters['cpnj'] = {
+            in: 'body',
+            description: 'CNPJ Number',
+            required: true,
+            type: 'string',
+            schema: { cpnj: '0565' }
+        }
+          #swagger.parameters['companyName'] = {
+            in: 'body',
+            description: 'The company Name',
+            required: true,
+            type: 'string',
+            schema: { companyName: "StarLigth" }
+        }
+          #swagger.parameters['contact'] = {
+            in: 'body',
+            description: 'Contact',
+            required: true,
+            type: 'string',
+            schema: { contact: "9985152" }
+        }
+        */
         try {
             const cnpjNum = Number(req.body.cnpj);
             let bank = {
@@ -65,7 +99,42 @@ class BankController{
     }
     async update(req,res){
         // #swagger.tags = ['BANK']
+
         // #swagger.description = 'Update a DateBank using a ID to the find him into DB'
+
+        /* #swagger.responses[200] = {
+            description: 'Successfully Updated',
+            schema: { $ref: '#/definitions/Bank'},
+            
+        }*/
+        
+        /* #swagger.parameters['id'] ={
+            in: 'path',
+            description: 'Using to find him',
+            required: true
+        }
+            #swagger.parameters['cpnj'] = {
+            in: 'body',
+            description: 'A New CNPJ Number',
+            required: true,
+            type: 'string',
+            schema: { cpnj: '0565' }
+        }
+          #swagger.parameters['companyName'] = {
+            in: 'body',
+            description: 'A New Company Name',
+            required: true,
+            type: 'string',
+            schema: { companyName: "StarLigth" }
+        }
+          #swagger.parameters['contact'] = {
+            in: 'body',
+            description: 'A New Contact',
+            required: true,
+            type: 'string',
+            schema: { contact: "9985152" }
+        }
+        */
 
         try {
             const findById = Number(req.params.id);
