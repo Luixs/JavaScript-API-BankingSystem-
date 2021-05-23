@@ -11,6 +11,38 @@ function ConvertDate(data){
 
 class AgencyController{
     async create(req,res){
+        // #swagger.tags = ['Account']
+        
+        // #swagger.description = 'Create a New Account into DB'
+
+        /* #swagger.responses[201] = {
+            description: 'Successfully Created',
+            schema: { $ref: '#/definitions/Account'}
+        }
+        */
+
+        /* #swagger.parameters['agencyId'] = {
+            in: 'body',
+            decription: 'Taked a Agency Account to the Relationship',
+            required: true,
+            type: 'string',
+            schema: { agencyId: '1'}
+        } 
+          #swagger.parameters['clientId'] = {
+            in: 'body',
+            decription: 'Taked a Client Account to the Relationship',
+            required: true,
+            type: 'string',
+            schema: { clientId: '1'}
+        }
+          #swagger.parameters['accountopening'] = {
+            in: 'body',
+            decription: 'The date of Opening Account',
+            required: true,
+            type: 'date',
+            schema: { clientId: '25-04-2021'}
+          }
+        */
         try {
             const agencyId = Number(req.body.agencyId);
             const clientId = Number(req.body.clientId);
@@ -24,13 +56,52 @@ class AgencyController{
                     accountopening: date         
                 }
                 const accoutRes = await Account.create(accoutNew);
-                res.status(200).json({"Create Account": accoutRes})
+                res.status(201).json({"Create Account": accoutRes})
             }            
         } catch (error) {
             res.status(400).json({erro: error.message});
         }
     }
     async update(req,res){
+        // #swagger.tags = ['Account']
+        
+        // #swagger.descriptiom = 'Update a DateBank using a ID to the find him into DB'
+
+        /* #swagger.responses[200] = {
+            description: 'Successfully Updated',
+            schema: { $ref: '#/definitions/Bank'},
+            
+        }*/
+
+        /* #swagger.parameters['id'] ={
+            in: 'path',
+            description: 'Using to find him',
+            required: true
+        }        
+        #swagger.parameters['agencyId'] = {
+            in: 'body',
+            decription: 'Taked a Agency Account to the Relationship',
+            required: true,
+            type: 'string',
+            schema: { agencyId: '1'}
+        } 
+          #swagger.parameters['clientId'] = {
+            in: 'body',
+            decription: 'Taked a Client Account to the Relationship',
+            required: true,
+            type: 'string',
+            schema: { clientId: '1'}
+        }
+          #swagger.parameters['accountopening'] = {
+            in: 'body',
+            decription: 'The date of Opening Account',
+            required: true,
+            type: 'date',
+            schema: { clientId: '25-04-2021'}
+          }
+        */
+
+        // FINALIZAR ESSA ROUTE NO SUNDAY
         try {
             const idSearch = Number(req.params.id);
             console.log(idSearch)
@@ -57,6 +128,17 @@ class AgencyController{
         }
     }
     async getAll(req,res){
+        // #swagger.tags = ['Account']
+
+        // #swagger.description = 'Search all Accounts from the DataBase'
+
+        /* #swagger.responses[200] = {
+            description :'All Accounts returned'
+        }
+        #swagger.responses[400] = {
+            description : 'Unexpected error appearing in the message'
+        }
+        */
         try {
             const allAccounts = await Account.findAll({
                 include: [{
@@ -73,6 +155,25 @@ class AgencyController{
         }
     }
     async getOne(req,res){
+        // #swagger.tags = ['Account']
+
+        // #swagger.description = 'Search a Account using a id params'
+
+        /* #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'insert a number',
+            required: true,
+            type: 'integer'
+        }*/
+
+        /* #swagger.responses[200] = {
+            description: 'Return a Account',
+            schema: { $ref: '#/definitions/Account'}
+        }
+
+        #swagger.responses[400] = {
+            description: 'Unexpected error appearing in the message'
+        }*/
         try {
             const idSearch = Number(req.params.id);
             const accountFromId = await Account.findByPk(idSearch,{
@@ -94,6 +195,26 @@ class AgencyController{
         }
     }
     async delete(req,res){
+        // #swagger.tags = ['Account']
+
+        // #swagger.description = 'Delete a Account from the DataBase Finded by ID'
+
+        /* #swagger.responses[200] = {
+            description: 'Deleted Account',
+            schema: { $ref: '#/definitions/Account'},
+            
+        }
+        #swagger.responses[401] = {
+            description: "Not found this Account using the ID"
+        }*/
+
+        
+        /*#swagger.parameters['id'] ={
+            in: 'path',
+            description: 'Using to find him',
+            required: true
+        }*/
+
         try {
             const idSearch = Number(req.params.id);
             const accountFromId = await Account.findByPk(idSearch,{

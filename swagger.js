@@ -25,17 +25,11 @@ const docs = {
     },Agency: {
         number: 44,
         description: "Description of the simples Agency with a Bank associate",
-        bank:{
-            $ref: '#/definitions/Bank'
-        }
+        BankId: 1
     },Account: {
         accountopening: "25-04-2021",
-        clientId: {
-            $ref: '#/definitions/Client'
-        },
-        agencyId: {
-            $ref: '#/definitions/Agency'
-        }
+        clientId: 1,
+        agencyId: 1
     },Client: {
         name: "Luis Starlino",
         cpf: 1423058026,

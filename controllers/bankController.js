@@ -2,15 +2,17 @@ const { Bank } =  require('../models');
 
 class BankController{
     async getAll(req,res){
-        // #swagger.tags = ['BANK']
-        // #swagger.description = 'Search all Banks from de data base'
+        // #swagger.tags = ['Bank']
+
+        // #swagger.description = 'Search all Banks from the DataBase'
+        
         /* #swagger.responses[200] = {
             description: 'Return all banks'
-        }*/
-        /* #swagger.responses[400] = {
+        }
+        #swagger.responses[400] = {
             description: "Unexpected error appearing in the message"
         }
-         */
+        */
         try {
             const allBanks = await Bank.findAll();
             res.status(200).json({"Bank List": allBanks});
@@ -19,16 +21,16 @@ class BankController{
         }
     }
     async getOne(req,res){
-        // #swagger.tags = ['BANK']
+        // #swagger.tags = ['Bank']
         // #swagger.description = 'Search a Bank using a id params'
 
         /* #swagger.parameters['id'] = {
             in: 'path',
-            description: 'try to put a number right here',
+            description: 'Put a number',
             required: true,
             type: 'integer'
-        }
-        */
+        }*/
+
         /* #swagger.responses[200] = {
             schema: { $ref: '#/definitions/Bank'},
             description: 'Return a Bank'
@@ -52,22 +54,21 @@ class BankController{
         }
     }
     async create(req,res){
-        // #swagger.tags = ['BANK']
+        // #swagger.tags = ['Bank']
 
         // #swagger.description = 'Create a New Bank into DB'
 
         /* #swagger.responses[201] = {
             description: 'Successfully Created',
-            schema: { $ref: '#/definitions/Bank'},
-            
+            schema: { $ref: '#/definitions/Bank'}
         }*/
 
         /* #swagger.parameters['cpnj'] = {
             in: 'body',
-            description: 'CNPJ Number',
+            description: 'Put a CNPJ',
             required: true,
-            type: 'string',
-            schema: { cpnj: '0565' }
+            type: 'integer',
+            schema: { cpnj: 4568}
         }
           #swagger.parameters['companyName'] = {
             in: 'body',
@@ -98,7 +99,7 @@ class BankController{
         }
     }
     async update(req,res){
-        // #swagger.tags = ['BANK']
+        // #swagger.tags = ['Bank']
 
         // #swagger.description = 'Update a DateBank using a ID to the find him into DB'
 
@@ -155,7 +156,7 @@ class BankController{
         }
     }
     async delete(req,res){
-        // #swagger.tags = ['BANK']
+        // #swagger.tags = ['Bank']
 
         // #swagger.description = 'Delete a Bank from the DataBase Finded by ID'
 
@@ -163,12 +164,16 @@ class BankController{
             description: 'Deleted Bank',
             schema: { $ref: '#/definitions/Bank'},
             
+        }
+        #swagger.responses[401] = {
+            description: "Not found this bank using the ID"
         }*/
 
-        /* #swagger.responses[401] = {
-            description: "Not found this bank using the ID"
-        }
-        */
+        /*#swagger.parameters['id'] ={
+            in: 'path',
+            description: 'Using to find him',
+            required: true
+        }*/
       
         try {
             const findById = Number(req.params.id);

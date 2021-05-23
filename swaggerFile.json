@@ -21,7 +21,7 @@
     "/": {
       "get": {
         "tags": [
-          "MAIN ROUTE"
+          "Main Route"
         ],
         "description": "A Main Route to the Bank System API(BS-API), return a simple JSON",
         "parameters": [],
@@ -46,93 +46,105 @@
     },
     "/accounts": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Account"
+        ],
+        "description": "Search all Accounts from the DataBase",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "All Accounts returned"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
           }
         }
       }
     },
     "/account/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Account"
+        ],
+        "description": "Search a Account using a id params",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "insert a number"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Return a Account",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
           }
         }
       },
       "put": {
-        "tags": [],
+        "tags": [
+          "Account"
+        ],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {}
-      },
-      "delete": {
-        "tags": [],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
+            "type": "string",
+            "description": "Using to find him"
           },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/account": {
-      "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [
           {
-            "name": "obj",
+            "name": "agencyId",
             "in": "body",
+            "decription": "Taked a Agency Account to the Relationship",
+            "required": true,
+            "type": "string",
             "schema": {
               "type": "object",
               "properties": {
                 "agencyId": {
-                  "example": "any"
-                },
+                  "type": "string",
+                  "example": "1"
+                }
+              }
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "body",
+            "decription": "Taked a Client Account to the Relationship",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "clientId": {
-                  "example": "any"
-                },
-                "accountopening": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "1"
+                }
+              }
+            }
+          },
+          {
+            "name": "accountopening",
+            "in": "body",
+            "decription": "The date of Opening Account",
+            "required": true,
+            "type": "date",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clientId": {
+                  "type": "string",
+                  "example": "25-04-2021"
                 }
               }
             }
@@ -140,7 +152,105 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully Updated",
+            "schema": {
+              "$ref": "#/definitions/Bank"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Delete a Account from the DataBase Finded by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Using to find him"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted Account",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Not found this Account using the ID"
+          }
+        }
+      }
+    },
+    "/account": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "description": "Create a New Account into DB",
+        "parameters": [
+          {
+            "name": "agencyId",
+            "in": "body",
+            "decription": "Taked a Agency Account to the Relationship",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "agencyId": {
+                  "type": "string",
+                  "example": "1"
+                }
+              }
+            }
+          },
+          {
+            "name": "clientId",
+            "in": "body",
+            "decription": "Taked a Client Account to the Relationship",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clientId": {
+                  "type": "string",
+                  "example": "1"
+                }
+              }
+            }
+          },
+          {
+            "name": "accountopening",
+            "in": "body",
+            "decription": "The date of Opening Account",
+            "required": true,
+            "type": "date",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "clientId": {
+                  "type": "string",
+                  "example": "25-04-2021"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successfully Created",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -154,9 +264,9 @@
     "/banks": {
       "get": {
         "tags": [
-          "BANK"
+          "Bank"
         ],
-        "description": "Search all Banks from de data base",
+        "description": "Search all Banks from the DataBase",
         "parameters": [],
         "responses": {
           "200": {
@@ -171,7 +281,7 @@
     "/bank/{id}": {
       "get": {
         "tags": [
-          "BANK"
+          "Bank"
         ],
         "description": "Search a Bank using a id params",
         "parameters": [
@@ -180,7 +290,7 @@
             "in": "path",
             "required": true,
             "type": "integer",
-            "description": "try to put a number right here"
+            "description": "Put a number"
           }
         ],
         "responses": {
@@ -200,7 +310,7 @@
       },
       "put": {
         "tags": [
-          "BANK"
+          "Bank"
         ],
         "description": "Update a DateBank using a ID to the find him into DB",
         "parameters": [
@@ -274,7 +384,7 @@
       },
       "delete": {
         "tags": [
-          "BANK"
+          "Bank"
         ],
         "description": "Delete a Bank from the DataBase Finded by ID",
         "parameters": [
@@ -282,7 +392,8 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Using to find him"
           }
         ],
         "responses": {
@@ -304,22 +415,22 @@
     "/bank": {
       "post": {
         "tags": [
-          "BANK"
+          "Bank"
         ],
         "description": "Create a New Bank into DB",
         "parameters": [
           {
             "name": "cpnj",
             "in": "body",
-            "description": "CNPJ Number",
+            "description": "Put a CNPJ",
             "required": true,
-            "type": "string",
+            "type": "integer",
             "schema": {
               "type": "object",
               "properties": {
                 "cpnj": {
-                  "type": "string",
-                  "example": "0565"
+                  "type": "number",
+                  "example": 4568
                 }
               }
             }
@@ -372,70 +483,140 @@
     },
     "/clients": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Client"
+        ],
+        "description": "Search all Clients from the DataBase",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Return all Clients"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
           }
         }
       }
     },
     "/client/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Client"
+        ],
+        "description": "Search a Client using a id params",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "Put a number"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Return a Client",
+            "schema": {
+              "$ref": "#/definitions/Client"
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
+          },
+          "404": {
+            "description": "Not found a Client Using this ID"
           }
         }
       },
       "put": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Client"
+        ],
+        "description": "Update a DataBase using a ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Using to find him"
           },
           {
-            "name": "obj",
+            "name": "name",
             "in": "body",
+            "description": "Insert a New name",
+            "required": true,
+            "type": "string",
             "schema": {
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "any"
-                },
+                  "type": "string",
+                  "example": "Luis Starlino"
+                }
+              }
+            }
+          },
+          {
+            "name": "cpf",
+            "in": "body",
+            "description": "Insert a New cpf",
+            "required": true,
+            "type": "integer",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "cpf": {
-                  "example": "any"
-                },
+                  "type": "number",
+                  "example": 5212515
+                }
+              }
+            }
+          },
+          {
+            "name": "gender",
+            "in": "body",
+            "description": "Insert a New gender",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "gender": {
-                  "example": "any"
-                },
+                  "type": "string",
+                  "example": "Male"
+                }
+              }
+            }
+          },
+          {
+            "name": "wage",
+            "in": "body",
+            "description": "Insert a New wage",
+            "required": true,
+            "type": "integer",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "wage": {
-                  "example": "any"
-                },
-                "contact\r": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 50000
+                }
+              }
+            }
+          },
+          {
+            "name": "contact",
+            "in": "body",
+            "description": "Insert a New contact",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "contact": {
+                  "type": "string",
+                  "example": "+55 31 9859945"
                 }
               }
             }
@@ -443,59 +624,132 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully Updated",
+            "schema": {
+              "$ref": "#/definitions/Bank"
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
+          },
+          "404": {
+            "description": "Not found a Client using this ID"
           }
         }
       },
       "delete": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Client"
+        ],
+        "description": "Delete a Client from the DataBase Finded by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Using to find him"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Deleted Client",
+            "schema": {
+              "$ref": "#/definitions/Client"
+            }
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Not found this Client using the ID"
           }
         }
       }
     },
     "/client": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Client"
+        ],
+        "description": "Create a New Client into DB",
         "parameters": [
           {
-            "name": "obj",
+            "name": "name",
             "in": "body",
+            "description": "Insert a name",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Luis Starlino"
+                }
+              }
+            }
+          },
+          {
+            "name": "cpf",
+            "in": "body",
+            "description": "Insert a cpf",
+            "required": true,
+            "type": "integer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cpf": {
+                  "type": "number",
+                  "example": 5212515
+                }
+              }
+            }
+          },
+          {
+            "name": "gender",
+            "in": "body",
+            "description": "Insert a gender",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gender": {
+                  "type": "string",
+                  "example": "Male"
+                }
+              }
+            }
+          },
+          {
+            "name": "wage",
+            "in": "body",
+            "description": "Insert a wage",
+            "required": true,
+            "type": "integer",
             "schema": {
               "type": "object",
               "properties": {
                 "wage": {
-                  "example": "any"
-                },
-                "cpf": {
-                  "example": "any"
-                },
-                "name": {
-                  "example": "any"
-                },
-                "gender": {
-                  "example": "any"
-                },
-                "contact\r": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 50000
+                }
+              }
+            }
+          },
+          {
+            "name": "contact",
+            "in": "body",
+            "description": "Insert a contact",
+            "required": true,
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "contact": {
+                  "type": "string",
+                  "example": "+55 31 9859945"
                 }
               }
             }
@@ -504,6 +758,12 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "201": {
+            "description": "Successfully Created",
+            "schema": {
+              "$ref": "#/definitions/Client"
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -513,64 +773,105 @@
     },
     "/agencies": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Agency"
+        ],
+        "description": "Search all Agencies from the DataBase",
         "parameters": [],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Return all clients"
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
           }
         }
       }
     },
     "/agency/{id}": {
       "get": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Agency"
+        ],
+        "description": "Search a Agency using a id params",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "Put a number"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Return a Agency",
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
+          },
+          "404": {
+            "description": "Not found a Agency Using this ID"
           }
         }
       },
       "put": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Agency"
+        ],
+        "description": "Search a Agency using a id params",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Using to find him"
           },
           {
-            "name": "obj",
+            "name": "number",
             "in": "body",
+            "description": "Put New a Number identification",
+            "type": "integer",
             "schema": {
               "type": "object",
               "properties": {
                 "number": {
-                  "example": "any"
-                },
+                  "type": "number",
+                  "example": 44
+                }
+              }
+            }
+          },
+          {
+            "name": "description",
+            "in": "body",
+            "description": "Put a New description agency",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
                 "description": {
-                  "example": "any"
-                },
-                "bankId\r": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Insert right here a description"
+                }
+              }
+            }
+          },
+          {
+            "name": "bankId",
+            "in": "body",
+            "description": "Put a New Bank Id",
+            "type": "integer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "bankId": {
+                  "type": "number",
+                  "example": 1
                 }
               }
             }
@@ -578,64 +879,111 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Successfully Updated",
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
+          },
+          "404": {
+            "description": "Not found a Agency Using this ID"
           }
         }
       },
       "delete": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Agency"
+        ],
+        "description": "Delete a Agency from the DataBase Finded by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Using to find him"
           }
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Deleted Agency",
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
           },
           "400": {
             "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not found this Agency using the ID"
           }
         }
       }
     },
     "/agency": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "Agency"
+        ],
+        "description": "Create a New Agency into DB",
         "parameters": [
           {
-            "name": "obj",
+            "name": "number",
             "in": "body",
+            "description": "Put a Number identification",
+            "type": "integer",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "number": {
+                  "type": "number",
+                  "example": 44
+                }
+              }
+            }
+          },
+          {
+            "name": "description",
+            "in": "body",
+            "description": "Put a description agency",
+            "type": "string",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "example": "Insert right here a description"
+                }
+              }
+            }
+          },
+          {
+            "name": "bankId",
+            "in": "body",
+            "description": "Put a Bank Id",
+            "type": "integer",
             "schema": {
               "type": "object",
               "properties": {
                 "bankId": {
-                  "example": "any"
-                },
-                "number": {
-                  "example": "any"
-                },
-                "description": {
-                  "example": "any"
+                  "type": "number",
+                  "example": 1
                 }
               }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Successfully Created",
+            "schema": {
+              "$ref": "#/definitions/Agency"
+            }
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Unexpected error appearing in the message"
           }
         }
       }
@@ -670,8 +1018,9 @@
           "type": "string",
           "example": "Description of the simples Agency with a Bank associate"
         },
-        "bank": {
-          "$ref": "#/definitions/Bank"
+        "BankId": {
+          "type": "number",
+          "example": 1
         }
       }
     },
@@ -683,10 +1032,12 @@
           "example": "25-04-2021"
         },
         "clientId": {
-          "$ref": "#/definitions/Client"
+          "type": "number",
+          "example": 1
         },
         "agencyId": {
-          "$ref": "#/definitions/Agency"
+          "type": "number",
+          "example": 1
         }
       }
     },

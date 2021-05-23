@@ -8,7 +8,7 @@ const AccountController = require('../controllers/accountController');
 const routes = Router();
 
 routes.get('/', (req,res)=>{
-    // #swagger.tags = ['MAIN ROUTE']
+    // #swagger.tags = ['Main Route']
     // #swagger.description = 'A Main Route to the Bank System API(BS-API), return a simple JSON'
 
     /* #swagger.responses[200] = {
