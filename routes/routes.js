@@ -6,6 +6,8 @@ const ClientController = require('../controllers/clientController');
 const AgencyController = require('../controllers/agencyController');
 const AccountController = require('../controllers/accountController');
 const routes = Router();
+const jwt = require('jsonwebtoken');
+
 
 routes.get('/', (req,res)=>{
     // #swagger.tags = ['Main Route']
@@ -17,6 +19,9 @@ routes.get('/', (req,res)=>{
     }*/
     res.status(200).json({mensagem: "Hello, Welcome to the Bank System"});
 })
+
+// JWT TEST ROUTE
+
 
 // ACCOUT ROUTE
 routes.get('/accounts', AccountController.getAll);
