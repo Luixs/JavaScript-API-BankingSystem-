@@ -7,7 +7,7 @@ const AgencyController = require('../controllers/agencyController');
 const AccountController = require('../controllers/accountController');
 const routes = Router();
 const jwt = require('jsonwebtoken');
-
+const verify = require("../middlewares/authentication");
 
 routes.get('/', (req,res)=>{
     // #swagger.tags = ['Main Route']
@@ -17,12 +17,32 @@ routes.get('/', (req,res)=>{
         schema: {message: "Hello Horld"},
         description: 'A sucefull Message Route'
     }*/
-    res.status(200).json({mensagem: "Hello, Welcome to the Bank System"});
+    res.status(200).json({mensagem: "Hello, Welcome to the Bank System" });
 })
 
 // JWT TEST ROUTE
+routes.post('/login', (req,res)=>{
+    if(req.body.user == "admin" && req.body.password == "admin"){
+        let id = 44;
+        const token = jwt.sign({id}, process.env.ACCESS_SECRET,{
+            expiresIn: 1500
+        });
+        res.status(200).json({
+            auth: true,
+            token: token
+        })
+    }else{
+        res.status(401).json({message: "User not authorized, try a new one"})
+    }
+})
 
+routes.get('/logout', (req,res)=> {
+    res.status(200).json({auth: false, token:null})
+})
 
+routes.get('/test',verify, (req,res)=>{
+    res.status(200).json({message: "JWT is WORKING!!"})
+})
 // ACCOUT ROUTE
 routes.get('/accounts', AccountController.getAll);
 routes.get('/account/:id', AccountController.getOne);

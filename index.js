@@ -8,7 +8,7 @@ const swaggerFile = require('./swaggerFile.json');
 
 //JWT TEST
 const jwt = require ('jsonwebtoken');
-require('dotenv-safe').config();
+require('dotenv').config({path: "./config/.env"});
 
 app.use(express.urlencoded({extended: false}));
 app.use(routes);
