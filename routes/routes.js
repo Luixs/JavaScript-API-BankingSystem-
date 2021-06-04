@@ -22,16 +22,28 @@ routes.get('/', (req,res)=>{
 
 // JWT TEST ROUTE
 routes.post('/login', (req,res)=>{
-    if(req.body.user == "admin" && req.body.password == "admin"){
+    if(req.body.user == "luixs" && req.body.password == "123"){
         let id = 44;
-        const token = jwt.sign({id}, process.env.ACCESS_SECRET,{
+        let role = "user";
+        const token = jwt.sign({id: id, role: role}, process.env.ACCESS_SECRET,{
             expiresIn: 1500
         });
         res.status(200).json({
             auth: true,
             token: token
         })
-    }else{
+    }else if(req.body.user == "admin" && req.body.password == "admin"){
+        let id = 88;
+        let role="admin";
+        const token = jwt.sign({id: id, role: role}, process.env.ACCESS_SECRET,{
+            expiresIn: 1500
+        });
+        res.status(200).json({
+            auth: true,
+            token: token
+        })
+    }
+    else{
         res.status(401).json({message: "User not authorized, try a new one"})
     }
 })
@@ -40,9 +52,18 @@ routes.get('/logout', (req,res)=> {
     res.status(200).json({auth: false, token:null})
 })
 
-routes.get('/test',verify, (req,res)=>{
-    res.status(200).json({message: "JWT is WORKING!!"})
+routes.get('/testAdmin',verify(['admin']), (req,res)=>{
+    res.status(200).json({message: "JWT ADMIN is WORKING!!"})
 })
+
+
+routes.get('/testUser',verify(['user','admin']), (req,res)=>{
+    res.status(200).json({message: "JWT USER is WORKING!!"})
+})
+// AULA RAMON 1:49
+
+
+
 // ACCOUT ROUTE
 routes.get('/accounts', AccountController.getAll);
 routes.get('/account/:id', AccountController.getOne);
