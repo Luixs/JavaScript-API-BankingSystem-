@@ -5,6 +5,7 @@ const BankController = require ('../controllers/bankController');
 const ClientController = require('../controllers/clientController');
 const AgencyController = require('../controllers/agencyController');
 const AccountController = require('../controllers/accountController');
+const AuthController = require('../controllers/authController');
 const routes = Router();
 const jwt = require('jsonwebtoken');
 const verify = require("../middlewares/authentication");
@@ -21,6 +22,9 @@ routes.get('/', (req,res)=>{
 })
 
 // JWT TEST ROUTE
+
+routes.post('/login',AuthController.create);
+/*
 routes.post('/login', (req,res)=>{
     if(req.body.user == "luixs" && req.body.password == "123"){
         let id = 44;
@@ -47,7 +51,7 @@ routes.post('/login', (req,res)=>{
         res.status(401).json({message: "User not authorized, try a new one"})
     }
 })
-
+*/
 routes.get('/logout', (req,res)=> {
     res.status(200).json({auth: false, token:null})
 })
