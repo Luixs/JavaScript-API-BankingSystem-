@@ -1,6 +1,6 @@
 //  *---IMPORTS JWT---*
 const jwt = require('jsonwebtoken');
-const verify = require("../middlewares/authentication");
+const verificar = require('../middlewares/authentication');
 
 class autoController{
     async create(req,res){
@@ -32,7 +32,24 @@ class autoController{
             }
 
         } catch (error) {
-            res.status(400).json({erro: error.message})            
+            res.status(400).json({erro: error.message});
+        }
+    }
+    async destroyAuth(req,res){
+        try {
+            res.status(200).json({
+                auth: false,
+                key: null
+            })
+        } catch (error) {
+            res.status(400).json({erro: error.message});
+        }
+    }
+    async testAdmin(req,res){
+        try {
+            res.status(200).json({message: "Welcome, ADMIN is WORKING!!"});
+        } catch (error) {
+            res.status(400).json({erro: error.message});
         }
     }
 }

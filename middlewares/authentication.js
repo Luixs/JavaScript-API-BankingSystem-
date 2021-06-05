@@ -1,17 +1,6 @@
 /*----IMPORT------*/
 const jwt = require('jsonwebtoken');
 
-// ROLE VERIFY
-function verifyRole(roles,user){
-    roles.forEach(role => {
-        if (role == user.role){
-            return true
-        }
-    });
-    return false;
-}
-
-
 let verificar = function verificationJwt(roles){
     return (req,res,next) =>{       
         /* ---- BEARER VERIFICATION --- */
@@ -29,7 +18,12 @@ let verificar = function verificationJwt(roles){
             console.log(req.user.role);
             
             //ROLE VERIFICATION
-            let isValid = verifyRole(roles, req.user);
+            let isValid = false;
+            roles.forEach(role =>{
+                if(role == req.user.role){
+                    isValid = true;
+                }
+            })
             if(!isValid) res.status(401).json({mensage: "Usuário sem autorização!!"});//DEFINIR MENSAGEM
             next();
         })
