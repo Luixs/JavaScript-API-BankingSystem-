@@ -52,6 +52,13 @@ class autoController{
             res.status(400).json({erro: error.message});
         }
     }
+    async testUser(req,res){
+        try {
+            await res.status(200).json({message: "Welcome, USER is Working!!!"})            
+        } catch (error) {
+            res.status(400).json({erro: error.message})
+        }
+    }
 }
 
 module.exports = new autoController();

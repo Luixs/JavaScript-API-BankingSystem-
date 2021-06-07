@@ -25,14 +25,7 @@ routes.get('/', (req,res)=>{
 routes.post('/login',AuthController.create);
 routes.get('/logout', AuthController.destroyAuth);
 routes.get('/testAdmin',verify(['admin']),AuthController.testAdmin);
-
-
-
-routes.get('/testUser',verify(['user']), (req,res)=>{
-    res.status(200).json({message: "JWT USER is WORKING!!"})
-})
-// AULA RAMON 1:49
-
+routes.get('/testUser', verify(['user']), AuthController.testUser);
 
 
 // ACCOUT ROUTE

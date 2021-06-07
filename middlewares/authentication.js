@@ -14,9 +14,7 @@ let verificar = function verificationJwt(roles){
             // SECOND VERIFICATION
             if(error) res.status(401).json({erro: error});//DEFINIR MENSAGEM
             req.user= decoded;
-            console.log(roles);
-            console.log(req.user.role);
-            
+                        
             //ROLE VERIFICATION
             let isValid = false;
             roles.forEach(role =>{
