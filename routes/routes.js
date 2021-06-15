@@ -56,5 +56,15 @@ routes.put('/agency/:id',AgencyController.update);
 routes.post('/agency',AgencyController.create);
 routes.delete('/agency/:id',verify(['admin']),AgencyController.delete);
 
+// USER ROUTES
+routes.get('/users', (req,res)=>{
+    try {
+        res.status(200).json({message: "funcionando!"})
+    } catch (error) {
+        res.status(400).json({erro: error});
+    }
+})
+
+
 //EXPORT ALL ROUTES
 module.exports = routes;
