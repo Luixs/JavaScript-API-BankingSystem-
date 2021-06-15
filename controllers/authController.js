@@ -5,23 +5,23 @@ const verificar = require('../middlewares/authentication');
 class autoController{
     async create(req,res){
         try {
-            //SIMPLE USER
+            //SIMPLE USER (Modify to get a User from the SQL)
             if(req.body.user == "luixs" && req.body.password == "123"){
                 let id = 44;
                 let role = "user";
                 const token = jwt.sign({id: id, role: role}, process.env.ACCESS_SECRET,{
-                    expiresIn: 1500
+                    expiresIn: 300 //expire in 5Min
                 });
                 res.status(200).json({
                     auth: true,
                     token: token
                 })
-            }//ADMIN USER
+            }//ADMIN USER (Modify to get a ADMIN from the SQL)
             else if(req.body.user == "admin" && req.body.password == "admin"){
                 let id = 88;
                 let role="admin";
                 const token = jwt.sign({id: id, role: role}, process.env.ACCESS_SECRET,{
-                    expiresIn: 1500
+                    expiresIn: 300 //expire in 5Min
                 });
                 res.status(200).json({
                     auth: true,
