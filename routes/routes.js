@@ -6,6 +6,7 @@ const ClientController = require('../controllers/clientController');
 const AgencyController = require('../controllers/agencyController');
 const AccountController = require('../controllers/accountController');
 const AuthController = require('../controllers/authController');
+const UserController = require('../controllers/userController');
 const routes = Router();
 const verify = require("../middlewares/authentication");
 
@@ -57,13 +58,8 @@ routes.post('/agency',AgencyController.create);
 routes.delete('/agency/:id',verify(['admin']),AgencyController.delete);
 
 // USER ROUTES
-routes.get('/users', (req,res)=>{
-    try {
-        res.status(200).json({message: "funcionando!"})
-    } catch (error) {
-        res.status(400).json({erro: error});
-    }
-})
+routes.get('/users', UserController.getAll);
+routes.post('/user', UserController.create);
 
 
 //EXPORT ALL ROUTES
