@@ -1,12 +1,38 @@
-//  *---IMPORTS JWT---*
+//  *---IMPORTS ---*
 const jwt = require('jsonwebtoken');
-const verificar = require('../middlewares/authentication');
+const { User } = require('../models');
+const bcrypt = require('bcrypt');
+
+async function isAdmin(User){
+    if(User.name == "Administrator"){
+        return "admin"
+    }
+    else{
+        return "user"
+    }
+}
 
 class autoController{
     async create(req,res){
         try {
+            let user = req.body.user;
+            let password = req.body.password;
+            //USING THE DATABASE
+            let findUser =  await User.findOne({where:{user: user}});
+            //IF DON'T EXIST A USER
+            if(findUser ==null){
+                return res.status(401).json({Message:"User not found,try a new one"});
+            }
+            //INVALID PASSOWORD
+            else if (!await bcrypt.compare(password, findUser.password)){
+                return res.status(401).json({Message:"Invalid Password!!!"});
+            }
+            else{
+                let role = await isAdmin(findUser);
+                console.log(role);
+            }
             //SIMPLE USER (Modify to get a User from the SQL)
-            if(req.body.user == "luixs" && req.body.password == "123"){
+            /*if(req.body.user == "luixs" && req.body.password == "123"){
                 let id = 44;
                 let role = "user";
                 const token = jwt.sign({id: id, role: role}, process.env.ACCESS_SECRET,{
@@ -29,7 +55,7 @@ class autoController{
                 })
             }else{
                 res.status(401).json({message: "User not authorized, try a new one"})
-            }
+            }*/
 
         } catch (error) {
             res.status(400).json({erro: error.message});
