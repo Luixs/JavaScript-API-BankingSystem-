@@ -21,7 +21,7 @@ routes.get('/', (req,res)=>{
     res.status(200).json({mensagem: "Hello, Welcome to the Bank System" });
 })
 
-// JWT TEST ROUTE
+// JWT TEST ROUTE - ALL DONE
 routes.post('/login',AuthController.create);
 routes.get('/logout', AuthController.destroyAuth);
 routes.get('/testAdmin',verify(['admin']),AuthController.testAdmin);
@@ -36,29 +36,29 @@ routes.post('/account',verify(['admin']), AccountController.create);
 routes.delete('/account/:id',verify(['admin']), AccountController.delete);
 
 // BANK ROUTES
-routes.get('/banks', BankController.getAll); 
-routes.get('/bank/:id', BankController.getOne);
-routes.post('/bank', BankController.create);
-routes.put('/bank/:id',BankController.update);
+routes.get('/banks',verify(['admin']), BankController.getAll); 
+routes.get('/bank/:id',verify(['admin']), BankController.getOne);
+routes.post('/bank',verify(['admin']), BankController.create);
+routes.put('/bank/:id',verify(['admin']),BankController.update);
 routes.delete('/bank/:id',verify(['admin']),BankController.delete);
 
 // CLIENT ROUTES
-routes.get('/clients', ClientController.getAll);
-routes.get('/client/:id',ClientController.getOne);
-routes.post('/client', ClientController.create);
-routes.put('/client/:id', ClientController.update);
+routes.get('/clients',verify(['admin']), ClientController.getAll);
+routes.get('/client/:id',verify(['admin']),ClientController.getOne);
+routes.post('/client',verify(['admin']), ClientController.create);
+routes.put('/client/:id',verify(['admin']), ClientController.update);
 routes.delete('/client/:id',verify(['admin']), ClientController.delete);
 
 
 // AGENCY ROUTES
-routes.get('/agencies', AgencyController.getAll); 
-routes.get('/agency/:id',AgencyController.getOne);
-routes.put('/agency/:id',AgencyController.update);
-routes.post('/agency',AgencyController.create);
+routes.get('/agencies',verify(['admin']), AgencyController.getAll); 
+routes.get('/agency/:id',verify(['admin']),AgencyController.getOne);
+routes.put('/agency/:id',verify(['admin']),AgencyController.update);
+routes.post('/agency',verify(['admin']),AgencyController.create);
 routes.delete('/agency/:id',verify(['admin']),AgencyController.delete);
 
 // USER ROUTES
-routes.get('/users', UserController.getAll);
+routes.get('/users',verify(['admin']), UserController.getAll);
 routes.post('/user', UserController.create);
 
 

@@ -104,11 +104,20 @@ class AgencyController{
         // FINALIZAR ESSA ROUTE NO SUNDAY
         try {
             const idSearch = Number(req.params.id);
-            console.log(idSearch)
             const accountFromId = await Account.findByPk(idSearch);
-            console.log(accountFromId);
-            if(!accountFromId == accountFromId){
-                throw new Error("INVALID ID,Try a new One ID!!!")
+            if(accountFromId == null){
+                return res.status(404).json({message: "User Not Found, try another ID"});
+            }else{
+                const agencyId = Number(req.body.agencyId);
+                const clientId = Number(req.body.clientId);
+                let date = ConvertDate(req.body.accountopening);
+                let accoutNew = {
+                    agencyId: agencyId,
+                    clientId: clientId,
+                    accountopening: date         
+                }
+                await accountFromId.update(accoutNew);
+                return res.status(200).json({"New Account Status": accountFromId});
             }
             /*s
             if(!accountFromId){
@@ -124,7 +133,7 @@ class AgencyController{
                 res.status(200).json({"account updated": accountFromId});
             }*/
         } catch (error) {
-            
+            res.status(400).json({erro: error.message});
         }
     }
     async getAll(req,res){
